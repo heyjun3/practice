@@ -31,7 +31,7 @@ def get_chain():
     }
     return jsonify(response), 200
 
-@app.route('/transactions', methods=['GET', 'POST'])
+@app.route('/transactions', methods=['GET', 'POST', 'PUT', 'DELETE'])
 def transaction():
     block_chain = get_blockchain()
     if request.method == 'GET':
@@ -65,6 +65,34 @@ def transaction():
             return jsonify({'message': 'fail'}), 400
         return jsonify({'message': 'success'}), 201
 
+    if request.method == 'PUT':
+        request_json = request.json
+        required = {
+            'sender_blockchain_address',
+            'recipient_blockchain_address',
+            'sender_public_key',
+            'value',
+            'signature',
+        }
+        if not all([k in request_json for k in required]):
+            return jsonify({'message': 'missing values'}), 400
+
+        is_update = block_chain.add_transaction(
+            request_json['sender_blockchain_address'],
+            request_json['recipient_blockchain_address'],
+            request_json['value'],
+            request_json['sender_public_key'],
+            request_json['signature'],
+        )
+        if not is_update:
+            return jsonify({'message': 'fail'}), 400
+        return jsonify({'message': 'success'}), 201
+
+    if request.method == 'DELETE':
+        block_chain.transaction_pool = []
+        return jsonify({'message': 'success'}), 200
+
+
 @app.route('/mine', methods=['GET'])
 def mine():
     block_chain = get_blockchain()
@@ -80,6 +108,21 @@ def start_main():
     return jsonify({'message': 'success'}), 200
 
 
+@app.route('/consensus', methods=['PUT'])
+def consensus():
+    block_chain = get_blockchain()
+    replaced = block_chain.resolve_conflicts()
+    return jsonify({'replaced': replaced}), 200
+
+
+@app.route('/amount', methods=['GET'])
+def get_total_amount():
+    blockchain_address = request.args['blockchain_address']
+    return jsonify({
+        'amount': get_blockchain().calculate_total_amount(blockchain_address)
+    }), 200
+
+
 if __name__ == '__main__':
     from argparse import ArgumentParser
     parser = ArgumentParser()
@@ -88,5 +131,7 @@ if __name__ == '__main__':
     port = args.port
 
     app.config['port'] = port
+
+    get_blockchain().run()
 
     app.run(host='0.0.0.0', port=port, threaded=True, debug=True)
