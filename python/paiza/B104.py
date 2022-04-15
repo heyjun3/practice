@@ -12,7 +12,7 @@ for i in range(int(M)):
     sum = 0
     for l in lst:
         try:
-            value = float(l[i])
+            value = int(l[i])
         except ValueError:
             count -= 1
             continue
