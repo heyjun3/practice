@@ -24,3 +24,5 @@ yarn-error.log*
 
 # python
 .venv
+*.sqlite3
+__pycache__
