@@ -8,34 +8,50 @@ class Node(object):
         self.right = None
 
 
-def insert(node: Node, value: int) -> Node:
-    if node is None:
-        return Node(value)
+class BinarySearchTree(object):
 
-    if value < node.value:
-        node.left = insert(node.left, value)
-    else:
-        node.right = insert(node.right, value)
-    return node
+    def __init__(self) -> None:
+        self.root = None
 
+    def insert(self, value: int) -> None:
+        if self.root is None:
+            self.root = Node(value)
+            return
+            
+        def _insert(node: Node, value: int) -> Node:
+            if node is None:
+                return Node(value)
 
-def inorder(node: Node) -> None:
-    if node is not None:
-        inorder(node.left)
-        print(node.value)
-        inorder(node.right)
+            if value < node.value:
+                node.left = _insert(node.left, value)
+            else:
+                node.right = _insert(node.right, value)
+            return node
 
+        _insert(self.root, value)
 
-def search(node: Node, value: int) -> bool:
-    if node is None:
-        return False
+    def inorder(self) -> None:
+        def _inorder(node: Node) -> None:
+            if node is not None:
+                _inorder(node.left)
+                print(node.value)
+                _inorder(node.right)
 
-    if node.value == value:
-        return True
-    elif node.value > value:
-        return search(node.left, value)
-    elif node.value < value:
-        return search(node.right, value)
+        _inorder(self.root)
+
+    def search(self, value: int) -> bool:
+        def _search(node: Node, value: int) -> bool:
+            if node is None:
+                return False
+
+            if node.value == value:
+                return True
+            elif node.value > value:
+                return _search(node.left, value)
+            elif node.value < value:
+                return _search(node.right, value)
+
+        _search(self.root, value)
 
 
 def remove(node: Node, value: int) -> Node:
@@ -51,13 +67,3 @@ def remove(node: Node, value: int) -> Node:
             return node.right
         elif node.right is None:
             return node.left
-
-
-if __name__ == '__main__':
-    root = None
-    root = insert(root, 3)
-    root = insert(root, 6)
-    root = insert(root, 5)
-    print(root.value)
-    print(root.right.value)
-    print(root.right.left.value)
