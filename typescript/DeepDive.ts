@@ -26,9 +26,9 @@ const fooIndex = list.map(i => i.id).indexOf('foo');
 // var bar = foo
 // foo['baz'] = "123";
 
-var foo = {};
-var bar = foo;
-var baz = {};
+// var foo = {};
+// var bar = foo;
+// var baz = {};
 // console.log(foo === bar);
 // console.log(foo === baz);
 
@@ -62,3 +62,8 @@ function toInt_1(str: string): {valid: boolean, int?:number}{
 // console.log(toInt_1('1234.4'))
 var j = JSON.stringify({willStay: null, willBeGone: undefined});
 console.log(j)
+
+function func_1() {
+    console.log(this)
+}
+func_1()
