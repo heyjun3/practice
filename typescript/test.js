@@ -52,3 +52,18 @@ const x = Number(barr.toString());
 if (123) {
     console.log('Any number other than 0 is truthy')
 }
+var hello = "is it me you're looking for?"
+for (var char of hello){
+    console.log(char)
+}
+
+function* generator() {
+    var bar = yield 'foo';
+    console.log(bar);
+}
+
+const iter = generator()
+const foo_2 = iter.next()
+console.log(foo_2.value)
+const nextThing = iter.next()
+

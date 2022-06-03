@@ -177,3 +177,113 @@ for (var i = 0; i < 3; i++){
 for (var n = 0; n < 3; n++){
     funca_1[n]();
 }
+
+const foo_1 = {bar: 123}
+foo_1.bar = 456;
+console.log(foo_1)
+
+var rect = {x: 0, y: 10, width: 15, height: 20};
+var {x, y, width, height} = rect
+console.log(x, y, width, height)
+rect.x = 10;
+({x, y, width, height} = rect);
+console.log(x, y, width, height)
+
+const obj = {"some property": "some value"}
+
+const {"some property": someProperty} = obj
+console.log(someProperty === "some value")
+
+var {w, x, ...remaining} = {w: 1, x: 2, y: 3, z: 4}
+console.log(w, x, remaining)
+
+function goto(point2D: {x: number, y: number}){
+    console.log('goto')
+}
+const point3D = {x: 1, y: 2, z: 3}
+const {z, ...point2D} = point3D
+console.log(z, point2D)
+
+var a = 1, b = 2;
+[a, b] = [b, a];
+console.log(a, b)
+var [x, y, ...zz] = [1, 2, 3, 4]
+console.log(x, y, zz)
+
+var someArray = [9, 2, 5]
+for (var item in someArray){
+    console.log(someArray[item])
+}
+for (var value of someArray){
+    console.log(value)
+}
+// var hello = "is it me you're looking for?"
+// for (var char of hello){
+//     console.log(char)
+// }
+class Component {
+    constructor(public name: string){}
+}
+
+// interface IteratorResult<T>{
+//     done: boolean;
+//     value: T;
+// }
+
+// class Frame implements Iterator<Component>{
+//     private pointer = 0;
+//     constructor(public name: string, public components: Component[]){}
+
+//     public next(): IteratorResult<Component>{
+//         if (this.pointer < this.components.length){
+//             return {
+//                 done: false,
+//                 value: this.components[this.pointer++]
+//             }
+//         } else {
+//             return {
+//                 done: true,
+//             }
+//         }
+//     }
+// }
+
+var say = "手の中にある一羽 > ヤブの中の二羽";
+var html = htmlEscape `<div> 私はこのように言いたい : ${say}</div>`;
+
+function htmlEscape(literals: TemplateStringsArray, ...placeholders: string[]){
+    console.log(literals, placeholders)
+    let result = "";
+    for (let i = 0; i < placeholders.length; i++){
+        result += literals[i];
+        result += placeholders[i]
+            .replace(/&/g, '&amp;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+    }
+    result += literals[literals.length - 1];
+    return result;
+}
+console.log(html)
+
+// const promise = new Promise((resolve, reject) => {
+//     resolve(123)
+// })
+// promise.then((res) => {
+//     console.log('I get called', res === 123)
+// })
+// promise.catch((err) => {
+
+// })
+
+function* generator() {
+    var bar = yield 'foo';
+    console.log(bar);
+}
+
+const iter = generator()
+const foo_2 = iter.next()
+console.log(foo_2.value)
+const nextThing = iter.next('bar')
