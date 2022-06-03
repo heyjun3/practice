@@ -67,3 +67,17 @@ const foo_2 = iter.next()
 console.log(foo_2.value)
 const nextThing = iter.next()
 
+const test = async () => {
+    console.log(1)
+    await new Promise((resolve) => {
+        setTimeout(() => {
+            console.log(2);
+            resolve();
+        }, 1000)
+    })
+}
+const main = async () => {
+    await test();
+    console.log(3)
+}
+main()

@@ -63,10 +63,10 @@ function toInt_1(str: string): {valid: boolean, int?:number}{
 var j = JSON.stringify({willStay: null, willBeGone: undefined});
 console.log(j)
 
-function func_1() {
-    console.log(this)
-}
-func_1()
+// function func_1(){
+//     console.log(this)
+// }
+// func_1()
 
 class Point {
     x: number;
@@ -278,7 +278,7 @@ console.log(html)
 
 // })
 
-function* generator() {
+function* generator(): any {
     var bar = yield 'foo';
     console.log(bar);
 }
@@ -287,3 +287,19 @@ const iter = generator()
 const foo_2 = iter.next()
 console.log(foo_2.value)
 const nextThing = iter.next('bar')
+
+const test: Function = async () => {
+    console.log(1)
+    await new Promise<void>((resolve) => {
+        setTimeout(() => {
+            console.log(2);
+            resolve();
+        }, 1000)
+    })
+}
+const main = async () => {
+    await test();
+    console.log(3)
+}
+main()
+export var foo_bar = 1122
