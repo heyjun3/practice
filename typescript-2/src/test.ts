@@ -63,3 +63,69 @@ const x = extend({a: 'hello'}, {b: 43})
 
 type StrOrNum = string|number
 
+var foo = 123;
+var bar = 'hey';
+bar = foo as any;
+// console.log(bar)
+
+declare var process: any;
+// process.exit();
+
+declare var myPoint: {x: number; y: number};
+
+interface Point {
+    x: number; y: number;
+}
+
+interface Point {
+    z: number;
+}
+
+interface Crazy{
+    new():{
+        hello: number
+    };
+}
+
+// class CrayzClass implements Crazy {
+//     new () {
+//         return {hello: 123}
+//     }
+// }
+// const crazy = new CrayzClass();
+
+enum CardSuit {
+    Clubs,
+    Diamonds,
+    Hearts,
+    Spades,
+}
+var card = CardSuit.Clubs;
+card = 123
+
+enum Weekday {
+    Monday,
+    Tuesday,
+    Wednesday,
+    Thursday,
+    Friday,
+    Saturday,
+    Sunday,
+}
+
+namespace Weekday {
+    export function isBusinessDay(day: Weekday){
+        switch (day){
+            case Weekday.Saturday:
+            case Weekday.Sunday:
+                return false;
+            default:
+                return true;
+        }
+    }
+}
+
+const mon = Weekday.Monday;
+const sun = Weekday.Sunday;
+console.log(Weekday.isBusinessDay(mon))
+console.log(Weekday.isBusinessDay(sun))
