@@ -127,5 +127,15 @@ namespace Weekday {
 
 const mon = Weekday.Monday;
 const sun = Weekday.Sunday;
-console.log(Weekday.isBusinessDay(mon))
-console.log(Weekday.isBusinessDay(sun))
+// console.log(Weekday.isBusinessDay(mon))
+// console.log(Weekday.isBusinessDay(sun))
+
+var foo = 123;
+var bar = foo.toString();
+// console.log(bar)
+
+interface Window {
+    helloWorld(): void;
+}
+declare var Math: Math;
+console.log(Math)
