@@ -1,4 +1,5 @@
 import * as fs from 'fs';
+import { formatWithOptions } from 'util';
 
 var num: number = 123;
 function identity(num: number): number{
@@ -138,4 +139,43 @@ interface Window {
     helloWorld(): void;
 }
 declare var Math: Math;
-console.log(Math)
+// console.log(Math)
+
+interface ReturnString{
+    (): string
+}
+declare const foobar: ReturnString;
+
+interface CallMeWithNewToGetString {
+    new(): string
+}
+
+declare const Foo: CallMeWithNewToGetString;
+
+interface MyInterface {
+    name: string
+    displayName(): void;
+}
+
+class MyClass implements MyInterface {
+    name: string
+    constructor(name: string) {
+       this.name = name
+    }
+    displayName (): void {
+        console.log(this.name)
+    }
+}
+const myClass = new MyClass('Jun')
+myClass.displayName()
+
+declare var fooo: {barr?: {baz: string}};
+function immediate(callback: ()=>void) {
+    callback()
+}
+
+type Foo = {
+    readonly bar: number;
+    readonly bax: number;
+}
+let fooFoo: Foo = {bar: 123, bax: 456}
