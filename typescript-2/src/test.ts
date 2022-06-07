@@ -192,3 +192,16 @@ let iMakePoint3D = (): Point3D => ({x: 0, y: 0, z:0})
 
 iMakePoint2D = iMakePoint3D
 // iMakePoint3D = iMakePoint2D
+
+let z: number[];
+let b!: number[];
+
+initialize()
+
+b.push(4)
+
+function initialize(){
+    z = [0, 1, 2, 3,]
+    b = [0, 1, 2, 3,]
+}
+// console.log(z)
