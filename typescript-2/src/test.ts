@@ -179,3 +179,16 @@ type Foo = {
     readonly bax: number;
 }
 let fooFoo: Foo = {bar: 123, bax: 456}
+
+let foo_1: any = 123;
+foo_1.toPrecision(3)
+console.log(foo_1)
+
+interface Point2D {x: number; y: number;}
+interface Point3D {x: number; y: number; z: number}
+
+let iMakePoint2D = (): Point2D => ({x: 0, y: 0})
+let iMakePoint3D = (): Point3D => ({x: 0, y: 0, z:0})
+
+iMakePoint2D = iMakePoint3D
+// iMakePoint3D = iMakePoint2D
