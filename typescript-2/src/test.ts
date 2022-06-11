@@ -205,3 +205,5 @@ function initialize(){
     b = [0, 1, 2, 3,]
 }
 // console.log(z)
+
+import Fooss from './error'

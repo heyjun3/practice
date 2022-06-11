@@ -88,3 +88,5 @@ function foosfoo() {
 const foosfo = foosfoo()
 let varialbe = foosfo()
 console.log(varialbe)
+class Foo{}
+export default Foo
