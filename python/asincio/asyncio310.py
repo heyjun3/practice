@@ -68,4 +68,15 @@ async def main_4():
     except asyncio.TimeoutError:
         print('timeout!!')
 
-asyncio.run(main_4())
+async def pprint(num: int):
+    while True:
+        await asyncio.sleep(num)
+        print(f'asyncio test {num}', time.time())
+
+async def main_5():
+    task1 = asyncio.create_task(pprint(1))
+    task2 = asyncio.create_task(pprint(2))
+    await task1
+    await task2
+
+asyncio.run(main_5())
