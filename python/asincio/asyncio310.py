@@ -79,4 +79,18 @@ async def main_5():
     await task1
     await task2
 
-asyncio.run(main_5())
+async def wait_x_sec(num: int):
+    print(datetime.datetime.now(), num)
+    await asyncio.sleep(num)
+    print(datetime.datetime.now(), num)
+
+async def main_6():
+    task1 = asyncio.create_task(wait_x_sec(10))
+    task2 = asyncio.create_task(wait_x_sec(1))
+    print(asyncio.current_task())
+    await asyncio.gather(task1, task2)
+    print(asyncio.current_task())
+
+if __name__ == '__main__':
+    asyncio.run(main_6())
+    
