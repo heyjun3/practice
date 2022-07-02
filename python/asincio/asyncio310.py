@@ -91,6 +91,23 @@ async def main_6():
     await asyncio.gather(task1, task2)
     print(asyncio.current_task())
 
+import requests
+def request(url):
+    print(datetime.datetime.now())
+    response = requests.get(url)
+    print(datetime.datetime.now())
+    return response
+import aiohttp
+
+async def async_request(url):
+    print(datetime.datetime.now())
+    async with aiohttp.request('GET', url) as response:
+        print(datetime.datetime.now())
+        return response
+
+
 if __name__ == '__main__':
-    asyncio.run(main_6())
+    url = 'https://yahoo.co.jp'
+    # asyncio.run(main_6())
+    asyncio.run(async_request(url))
     
