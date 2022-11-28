@@ -26,6 +26,6 @@ def request_pokemon():
         print(pokemon['name'], datetime.datetime.now())
 
 
-# request_pokemon()
-asyncio.run(main())
+request_pokemon()
+# asyncio.run(main())
 print(time.time() - start_time)

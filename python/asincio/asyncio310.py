@@ -109,5 +109,5 @@ async def async_request(url):
 if __name__ == '__main__':
     url = 'https://yahoo.co.jp'
     # asyncio.run(main_6())
-    asyncio.run(async_request(url))
+    asyncio.run(main())
     
