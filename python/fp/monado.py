@@ -12,10 +12,15 @@ class Maybe(object):
 
     @staticmethod
     def from_None(value):
-        return Maybe(value) if value is not None else Maybe(None)
+        return Maybe(value) if value is not None else Nothing(None)
 
     def map(self, func):
         return Maybe.from_None(func(self.value))
+
+class Nothing(Maybe):
+
+    def map(self, f):
+        return self
 
 def lift(f):
     def _inner(value):
@@ -27,7 +32,6 @@ def run(f):
         result = container.map(f)
         return result
     return _inner
-
 
 def add(a):
     if isinstance(a, int):
@@ -41,7 +45,7 @@ if __name__ == '__main__':
         lambda v, f: f(v),
         [
             lift(add),
-            run(add),
+            run(lambda x: str(x)),
             run(lambda x: x * x),
-        ], 1)
+        ], None)
     print(result.get())
