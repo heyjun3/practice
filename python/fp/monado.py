@@ -17,11 +17,10 @@ class Maybe(object):
     def map(self, func):
         return Maybe.from_None(func(self.value))
 
-def lift(f, value):
-    return Maybe.from_None(value).map(f)
-
-# def run(f, container: Maybe):
-    # return container.map(f)
+def lift(f):
+    def _inner(value):
+        return Maybe.from_None(value).map(f)
+    return _inner
 
 def run(f):
     def _inner(container: Maybe):
@@ -29,12 +28,20 @@ def run(f):
         return result
     return _inner
 
+
 def add(a):
     if isinstance(a, int):
         return a + 1
     return None
 
+
 if __name__ == '__main__':
 
-    result = functools.reduce(lambda v, f: f(v), [functools.partial(lift, add), run(add)], 1)
+    result = functools.reduce(
+        lambda v, f: f(v),
+        [
+            lift(add),
+            run(add),
+            run(lambda x: x * x),
+        ], 1)
     print(result.get())
