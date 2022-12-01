@@ -38,14 +38,21 @@ def add(a):
         return a + 1
     return None
 
+def array_sum(l, s=0):
+    if not len(l):
+        return 0
+    return array_sum(l[1:], s + l[0])
+
 
 if __name__ == '__main__':
 
-    result = functools.reduce(
-        lambda v, f: f(v),
-        [
-            lift(add),
-            run(lambda x: str(x)),
-            run(lambda x: x * x),
-        ], None)
-    print(result.get())
+    # result = functools.reduce(
+    #     lambda v, f: f(v),
+    #     [
+    #         lift(add),
+    #         run(lambda x: str(x)),
+    #         run(lambda x: x * x),
+    #     ], None)
+    # print(result.get())
+    l = range(10000)
+    print(array_sum(l))
